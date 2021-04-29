@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[59],{297:function(e,n,r){"use strict";r.r(n);var s=r(368);class t{_decode(e){const n=Object(s.a)(e.buffer,e.options);return Promise.resolve({result:n,transferList:[n.pixelData.buffer]})}}n.default=function(){return new t}}}]);

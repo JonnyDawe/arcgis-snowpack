@@ -1,0 +1,10 @@
+import { n, e, y, bK as b, a1 as e$1, o, i, h, B as g, aT as w, aV as P, s } from './Identifiable-c8406192.js';
+import './config-b3bf08ce.js';
+
+/*
+All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+See https://js.arcgis.com/4.19/esri/copyright.txt for details.
+*/
+const d=n.getLogger("esri.layers.mixins.PortalLayer"),u=r=>{let u=class extends r{constructor(){super(...arguments),this.resourceReferences={portalItem:null,paths:[]};}destroy(){var t;null==(t=this.portalItem)||t.destroy(),this.portalItem=null;}set portalItem(t){t!==this._get("portalItem")&&(this.removeOrigin("portal-item"),this._set("portalItem",t));}readPortalItem(t,r,e){if(r.itemId)return new b({id:r.itemId,portal:e&&e.portal})}writePortalItem(t,r){t&&t.id&&(r.itemId=t.id);}async loadFromPortal(t,r){if(this.portalItem&&this.portalItem.id)try{const e=await import('./layersLoader-9fd8b2c5.js');return h(r),await e.load({instance:this,supportedTypes:t.supportedTypes,validateItem:t.validateItem,supportsData:t.supportsData},r)}catch(e){throw g(e)||d.warn(`Failed to load layer (${this.title}, ${this.id}) portal item (${this.portalItem.id})\n  ${e}`),e}}read(t,r){r&&(r.layer=this),super.read(t,r);}write(t,r){const e=r&&r.portal,o=this.portalItem&&this.portalItem.id&&(this.portalItem.portal||w.getDefault());return e&&o&&!P(o.restUrl,e.restUrl)?(r.messages&&r.messages.push(new s("layer:cross-portal",`The layer '${this.title} (${this.id})' cannot be persisted because it refers to an item on a different portal than the one being saved to. To save the scene, set the layer.portalItem to null or save the scene to the same portal as the item associated with the layer`,{layer:this})),null):super.write(t,{...r,layer:this})}};return e([y({type:b})],u.prototype,"portalItem",null),e([e$1("web-document","portalItem",["itemId"])],u.prototype,"readPortalItem",null),e([o("web-document","portalItem",{itemId:{type:String}})],u.prototype,"writePortalItem",null),e([y()],u.prototype,"resourceReferences",void 0),u=e([i("esri.layers.mixins.PortalLayer")],u),u};
+
+export { u };

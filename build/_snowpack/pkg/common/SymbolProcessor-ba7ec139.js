@@ -1,0 +1,73 @@
+import { n, e, i, h, P as r, A as k$1, c6 as A, J as t$1, cD as s$1, B as g, Y as e$1 } from './Identifiable-c8406192.js';
+import { a as t } from './config-b3bf08ce.js';
+import { m, a } from './diffUtils-e1cd943c.js';
+import { g as g$1 } from './definitions-681c54ec.js';
+import { n as n$1 } from './schemaUtils-da3a1cd7.js';
+import { l } from './CollisionGrid-f4bf0079.js';
+import { t as te } from './Utils-0d5f7d82.js';
+import { b as r$1, s, d as i$1, E, g as t$2, k as k$2 } from './WGLMeshFactory-30b8f0b9.js';
+import { v } from './ComputedAttributeStorage-2aa309af.js';
+import { p } from './BaseProcessor-b1ef5091.js';
+import './symbols-a702d148.js';
+import './fieldUtils-a9f71c96.js';
+import './persistableUrlUtils-b4be11a9.js';
+import './UniqueValueRenderer-6eda9445.js';
+import './ColorStop-27e1a5ee.js';
+import './styleUtils-062f64a7.js';
+import './sizeVariableUtils-33233df0.js';
+import './visualVariableUtils-66f67c57.js';
+import './compilerUtils-006be997.js';
+import './Graphic-9f79c7db.js';
+import './jsonUtils-d762dc00.js';
+import './PopupTemplate-77ad81c4.js';
+import './uid-7967dd4d.js';
+import './lengthUtils-cb1a7b62.js';
+import './unitUtils-1b0a3531.js';
+import './jsonUtils-abe1bd07.js';
+import './LRUCache-9b61e325.js';
+import './MemCache-1f56f5a2.js';
+import './MD5-944ef260.js';
+import './MaterialKey-1dd9041e.js';
+import './visualVariablesUtils-c37b8ac9.js';
+import './aaBoundingRect-a3d841c1.js';
+import './normalizeUtils-2bbe7974.js';
+import './vec2-f6c2e17c.js';
+import './vec3-ae5ae182.js';
+import './vec3f64-a6795633.js';
+import './TileStrategy-ff1490fc.js';
+import './TileInfoView-40300351.js';
+import './TileKey-482fe256.js';
+import './Rect-7bb5ea0f.js';
+import './BidiEngine-aa559a1b.js';
+import './FeatureSetReader-a4e80fde.js';
+import './OptimizedFeatureSet-d6270f6b.js';
+import './featureConversionUtils-6830a580.js';
+import './centroid-a0ceb19b.js';
+import './FramebufferObject-903a1e6f.js';
+import './_commonjsHelpers-268aa74f.js';
+import './tileUtils-aab0f1e2.js';
+import './Query-448be42b.js';
+import './TimeExtent-155cb8a4.js';
+import './Field-e6fe6b12.js';
+import './fieldType-769fe7ff.js';
+import './visualVariablesUtils-4c7ed7ac.js';
+import './TurboLine-5afa5e0b.js';
+import './GeometryUtils-04b09680.js';
+import './defaults-91b05a2c.js';
+import './defaultsJSON-375e89aa.js';
+import './quantizationUtils-a3fdf3fa.js';
+import './projection-1aa78979.js';
+import './mat4-3619c4da.js';
+import './json-79b5edc1.js';
+import './quickselect-558f6195.js';
+import './FieldsIndex-d0d5f38b.js';
+import './HandleOwner-2c2dff93.js';
+import './watchUtils-880dbce7.js';
+
+/*
+All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+See https://js.arcgis.com/4.19/esri/copyright.txt for details.
+*/
+n.getLogger("esri.views.2d.layers.features.processors.SymbolProcessor");function k(e,t){return (!e.minScale||e.minScale>=t)&&(!e.maxScale||e.maxScale<=t)}function x(e){const t=e.message,i={message:{data:{},tileKey:t.tileKey},transferList:new Array};for(const o in t.data){const e=t.data[o];if(i.message.data[o]=null,r(e)){const t=e.stride,r=e.indices.slice(0),a=e.vertices.slice(0),n=e.records.slice(0),c={stride:t,indices:r,vertices:a,records:n,metrics:A(e.metrics,(e=>e.slice(0)))};i.transferList.push(r,a,n),i.message.data[o]=c;}}return i}let C=class extends p{constructor(){super(...arguments),this.type="symbol",this._matchers={feature:null,aggregate:null},this._bufferData=new Map;}initialize(){this.handles.add([this.tileStore.on("update",this.onTileUpdate.bind(this))]);}destroy(){}get supportsTileUpdates(){return !0}async update(e,r){const s=r.schema.processors[0];if("symbol"!==s.type)return;const i=m(this._schema,s);a(i,"mesh")&&(t("esri-2d-update-debug")&&console.debug("Applying Update - Processor:",i),e.mesh=!0,e.why.mesh.push("Symbology changed"),this._schema=s,this._factory=this._createFactory(s),this._factory.update(s,this.tileStore.tileScheme.tileInfo));}onTileMessage(e,t,r,s){return h(s),this._onTileData(e,t,r,s)}onTileClear(e){const t={clear:!0};return this._bufferData.delete(e.key.id),this.remoteClient.invoke("tileRenderer.onTileData",{tileKey:e.id,data:t})}onTileError(e,t,r){const s=r.signal,i={tileKey:e.id,error:t};return this.remoteClient.invoke("tileRenderer.onTileError",i,{signal:s})}onTileUpdate(e){for(const t of e.removed){if(!this._bufferData.has(t.key.id))continue;this._bufferData.get(t.key.id).forEach((e=>{const t=new Set;te((s=>{const i=e.message.data[s];if(r(i)){const e=r$1.from(i.records).getCursor();for(;e.next();)t.add(e.id);}}));const s=e.message.tileKey,i={type:"update",addOrUpdate:null};return this.remoteClient.invoke("tileRenderer.onTileData",{tileKey:s,data:i})})),this._bufferData.delete(t.key.id);}for(const t of e.added)this._bufferData.forEach((e=>{for(const r of e)r.message.tileKey===t.id&&this._updateTileMesh("append",t,x(r),[],!1,!1,null);}));}_addBufferData(e,t){this._bufferData.has(e)||this._bufferData.set(e,[]),this._bufferData.get(e).push(x(t));}_createFactory(e){const{geometryType:t,objectIdField:r,fields:i}=this.service,o=(e,t)=>this.remoteClient.invoke("tileRenderer.getMaterialItems",e,t),a={geometryType:t,fields:i,spatialReference:k$1.fromJSON(this.spatialReference)},n=new k$2(o,!1),{matcher:c,aggregateMatcher:l}=e.mesh;return this._store=n,this._matchers.feature=s(c,n,a),this._matchers.aggregate=A(l,(e=>s(e,n,a))),new i$1(t,r,n)}async _onTileData(e,t,r,s){const{type:o,addOrUpdate:a,remove:n}=t,c=t.end;if(!a){const t={type:o,addOrUpdate:null,remove:n,clear:!1,end:c};return this.remoteClient.invoke("tileRenderer.onTileData",{tileKey:e.id,data:t},s)}const d=this._processFeatures(e,a,r,s);try{const r=await d;if(t$1(r)){const t={type:o,addOrUpdate:null,remove:n,clear:!1,end:c};return this.remoteClient.invoke("tileRenderer.onTileData",{tileKey:e.id,data:t},s)}for(const t of r)e.key.id!==t.message.tileKey&&this._addBufferData(e.key.id,t);await s$1(r.map((r=>{const i=e.key.id===r.message.tileKey,a=i?t.remove:[],n=i&&t.end;return this._updateTileMesh(o,e,r,a,n,t.clear,s.signal)})));}catch(m){this._handleError(e,m,s);}}async _updateTileMesh(e,t,r,i,a,n,l){const d=e,m=r.message.tileKey;m!==t.key.id&&(a=!1);const p=A(r,(e=>e.message)),h$1=A(r,(e=>e.transferList))||[],f={type:d,addOrUpdate:p,remove:i,clear:!1,end:a},u={transferList:e$1(h$1)||[],signal:l};return h(u),this.remoteClient.invoke("tileRenderer.onTileData",{tileKey:m,data:f},u)}async _processFeatures(e,t,r,s){if(t$1(t)||!t.hasFeatures)return null;const o={transform:e.transform,hasZ:!1,hasM:!1},a=this._factory,n={viewingMode:"",scale:e.scale},l=await this._matchers.feature,d=await this._matchers.aggregate;h(s);const m=this._getLabelInfos(e,t);return await a.analyze(t.getCursor(),l,d,o,n),h(s),this._writeFeatureSet(e,t,o,m,a,r)}_writeFeatureSet(e,t,s,i,o,a){const n=t.getApproximateSize(),c="simple"===this._schema.mesh.matcher.type&&this._schema.mesh.matcher.isDotDensity,l=new E(e.key.id,{features:n,records:n,metrics:0},c,a,!0),d={viewingMode:"",scale:e.scale},m=t.getCursor();for(;m.next();)try{const t=m.getDisplayId(),a=r(i)?i.get(t):null;o.writeCursor(l,m,s,d,e.level,a);}catch(h){}const p=e.tileInfoView.tileInfo.isWrappable;return l.serialize(p)}_handleError(e,t,r){if(!g(t)){const s={tileKey:e.id,error:t.message};return this.remoteClient.invoke("tileRenderer.onTileError",s,{signal:r.signal})}}_getLabelInfos(e,t){const r=this._schema.mesh.labels,o=A(r,(t=>t.filter((t=>k(t,e.scale)))));if(t$1(o)||0===o.length)return null;const a=new Map,n=(new l(g$1),t.getCursor());for(;n.next();){const e=n.getDisplayId(),t=[],r=v(e),s=r&&1!==n.readAttribute("cluster_count")?"aggregate":"feature";for(const i of o){if(i.target!==s)continue;const o=n.getStorage(),a=r&&"feature"===s?o.getComputedStringAtIndex(n.readAttribute("referenceId"),i.fieldIndex):o.getComputedStringAtIndex(e,i.fieldIndex);if(!a)continue;const c=n$1(a.toString()),l=c[0],d=c[1];this._store.getMosaicItem(i.symbol,t$2(l)).then((e=>{t[i.index]={glyphs:e.glyphMosaicItems,rtl:d,index:i.index};}));}a.set(e,t);}return a}_shouldDiscard(e,t){switch(this.service.geometryType){case"esriGeometryPoint":{const r=t.readLegacyPointGeometry();return !r||e.checkOverlap(r.x,r.y)}case"esriGeometryPolygon":{const r=t.readLegacyCentroid();return !r||e.checkOverlap(r.x,r.y)}default:return !1}}_markUsed(e,t){switch(this.service.geometryType){case"esriGeometryPoint":{const{x:r,y:s}=t.readLegacyPointGeometry();return e.markUsed(r,s)}case"esriGeometryPolygon":{const{x:r,y:s}=t.readLegacyCentroid();return e.markUsed(r,s)}}}};C=e([i("esri.views.2d.layers.features.processors.SymbolProcessor")],C);var U=C;
+
+export default U;

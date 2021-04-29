@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "@arcgis/core/Map": "./@arcgis/core/Map.js",
+    "@arcgis/core/config.js": "./@arcgis/core/config.js",
+    "@arcgis/core/views/MapView": "./@arcgis/core/views/MapView.js",
+    "@arcgis/core/widgets/Search": "./@arcgis/core/widgets/Search.js",
+    "canvas-confetti": "./canvas-confetti.js"
+  }
+}

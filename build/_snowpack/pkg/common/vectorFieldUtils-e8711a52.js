@@ -1,0 +1,10 @@
+import { P as r$1 } from './Identifiable-c8406192.js';
+import { u } from './pixelUtils-5dbb0680.js';
+
+/*
+All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+See https://js.arcgis.com/4.19/esri/copyright.txt for details.
+*/
+const i=180/Math.PI,n=function(e){return e&&"esri.layers.support.PixelBlock"===e.declaredClass&&e.pixels&&e.pixels.length>0},r=new Map;function a(e,t){return r.get(e)/r.get(t)||1}function o(e){return (450-e)%360}function h(e,t="geographic"){const[n,r]=e,a=Math.sqrt(n*n+r*r);let h=Math.atan2(r,n)*i;return h=(360+h)%360,"geographic"===t&&(h=o(h)),[a,h]}function s(e,t="geographic"){let n=e[1];"geographic"===t&&(n=o(n)),n%=360;const r=e[0];return [r*Math.cos(n/i),r*Math.sin(n/i)]}function l(e,i,r="geographic",a=1){if(!n(e))return e;const{pixels:o,width:l,height:c}=e,p=l*c,u$1=o[0],x=o[1],m=u.createEmptyBand(e.pixelType,p),f=u.createEmptyBand(e.pixelType,p);let g=0;for(let t=0;t<c;t++)for(let e=0;e<l;e++)"vector-uv"===i?([m[g],f[g]]=h([u$1[g],x[g]],r),m[g]*=a):([m[g],f[g]]=s([u$1[g],x[g]],r),m[g]*=a,f[g]*=a),g++;const d=new u({pixelType:e.pixelType,width:e.width,height:e.height,mask:e.mask,validPixelCount:e.validPixelCount,maskIsAlpha:e.maskIsAlpha,pixels:[m,f]});return d.updateStatistics(),d}function c(e,t,i=1){if(1===i||!n(e))return e;const r=e.clone(),{pixels:a,width:o,height:h}=r,s=a[0],l=a[1];let c=0;for(let n=0;n<h;n++)for(let e=0;e<o;e++)"vector-uv"===t?(s[c]*=i,l[c]*=i):s[c]*=i,c++;return r.updateStatistics(),r}function p(t,i,n,r,a){if(!r$1(a)||!a.spatialReference.equals(t.spatialReference))return {extent:t,width:i,height:n};const o=a.xmin,h=a.ymax;r=Math.max(r||0,30);const s=Math.ceil(i*(1/r)),l=Math.ceil(n*(1/r)),c=((t.xmax-t.xmin)/s+(t.ymax-t.ymin)/l)/2;return t.xmin=o+Math.floor((t.xmin-o)/c)*c,t.xmax=o+Math.ceil((t.xmax-o)/c)*c,t.ymin=h+Math.floor((t.ymin-h)/c)*c,t.ymax=h+Math.ceil((t.ymax-h)/c)*c,{extent:t,width:Math.round(t.width/c),height:Math.round(t.height/c)}}r.set("meter-per-second",1),r.set("kilometer-per-hour",.277778),r.set("knots",.514444),r.set("feet-per-second",.3048),r.set("mile-per-hour",.44704);
+
+export { a, c, l, p };

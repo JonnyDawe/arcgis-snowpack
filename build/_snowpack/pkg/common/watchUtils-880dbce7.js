@@ -1,0 +1,10 @@
+import './config-b3bf08ce.js';
+import { a6 as A$1, a8 as v$1, ae as m, az as e, aA as r } from './Identifiable-c8406192.js';
+
+/*
+All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+See https://js.arcgis.com/4.19/esri/copyright.txt for details.
+*/
+function c(n,t,r,e,o){const u=n.watch(t,((t,o,u,c)=>{r&&!r(t)||null==e||e.call(n,t,o,u,c);}),o);if(Array.isArray(t))for(const c of t){const o=n.get(c);r&&r(o)&&(null==e||e.call(n,o,o,t,n));}else {const o=n.get(t);r&&r(o)&&(null==e||e.call(n,o,o,t,n));}return u}function i(n,t,r,i,f){const l="function"==typeof i?i:null,s="object"==typeof i?i:null;"boolean"==typeof i&&(f=i);let a,m$1=!1;function p(){a&&(a.remove(),a=null);}const v=A$1();v$1(s,(()=>{p(),v.reject(m());}));const d={then:v.promise.then.bind(v.promise),catch:v.promise.catch.bind(v.promise),remove:p};return Object.freeze(d),a=c(n,t,r,((t,r,e,o)=>{m$1=!0,p(),l&&l.call(n,t,r,e,o),v.resolve({value:t,oldValue:r,propertyName:e,target:o});}),f),m$1&&p(),d}function f(n){return !!n}function l(n){return !n}function s(n){return !0===n}function a(n){return !1===n}const v=/\?(\.|$)/g;function d(n,t,r,e){const o=Array.isArray(t)?t:t.indexOf(",")>-1?t.split(","):[t],u=h(n,t,r,e);for(const c of o){const t=c.trim().replace(v,"$1"),e=n.get(t);r.call(n,e,e,t,n);}return u}function h(n,t,r,e){return n.watch(t,r,e)}function y(n,t,r,e){return c(n,t,f,r,e)}function j(n,t,r,e){return i(n,t,f,r,e)}function b(n,t,r,e){return c(n,t,l,r,e)}function A(n,t,r,e){return i(n,t,l,r,e)}function w(n,t,r,e){return c(n,t,s,r,e)}function x(n,t,r,e){return i(n,t,s,r,e)}function O(n,t,r,e){return c(n,t,a,r,e)}function $(n,t,r,e){return i(n,t,a,r,e)}function B(n,t,r,e){let o=!1;const u=n.watch(t,((t,e,u,c)=>{o||r.call(n,t,e,u,c);}),e);return {remove(){u.remove();},pause(){o=!0;},resume(){o=!1;}}}function C(n,e$1,o,u,c,i,f){const l={};function s(t){const r=l[t];r&&(i&&i(r.target,t,n,o),r.handle.remove(),delete l[t]);}const a=d(n,e$1,((e$1,i,f)=>{s(f),e(e$1)&&(l[f]={handle:r(e$1,o,u),target:e$1},c&&c(e$1,f,n,o));}),f);return {remove(){a.remove();for(const n in l)s(n);}}}
+
+export { $, A, B, C, O, b, d, h, i, j, w, x, y };
